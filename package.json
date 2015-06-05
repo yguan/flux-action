@@ -1,0 +1,23 @@
+{
+    "name": "flux-action",
+    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yguan/flux-action"
+    },
+    "description": "An library inspired by Facebook's Flux.",
+    "author": "Yong Guan",
+    "dependencies": {
+        "flux": "^2.0.1"
+    },
+    "devDependencies": {
+        "gulp": "~3.8.0",
+        "vinyl-source-stream": "~0.1.1",
+        "connect": "2.19.6",
+        "browserify": "^6.2.0"
+    },
+    "engines": {
+        "node": ">=0.10.0"
+    },
+    "license": "MIT"
+}
