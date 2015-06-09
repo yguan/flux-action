@@ -13,7 +13,7 @@ module.exports = {
         dispatcher.register(function (payload) {
             if (actions.hasOwnProperty(payload.actionType)) {
                 actions[payload.actionType].callbacks.forEach(function (callback) {
-                    callback.call(this, payload.data);
+                    callback.fn.call(callback.scope || this, payload.data);
                 });
             }
 
@@ -367,8 +367,11 @@ Action.prototype = {
     dispatch: function (data) {
         this.dispatcher.dispatch(createPayload(this.name, data));
     },
-    register: function (callback) {
-        this.callbacks.push(callback);
+    register: function (callback, scope) {
+        this.callbacks.push({
+            fn: callback,
+            scope: scope
+        });
     }
 };
 

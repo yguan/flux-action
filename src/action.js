@@ -18,8 +18,11 @@ Action.prototype = {
     dispatch: function (data) {
         this.dispatcher.dispatch(createPayload(this.name, data));
     },
-    register: function (callback) {
-        this.callbacks.push(callback);
+    register: function (callback, scope) {
+        this.callbacks.push({
+            fn: callback,
+            scope: scope
+        });
     }
 };
 
