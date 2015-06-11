@@ -5,9 +5,12 @@ var Action = require('./action');
 var Dispatcher = require('flux').Dispatcher;
 
 module.exports = {
-    createActions: function (names) {
+    createActions: function (config) {
         var dispatcher = new Dispatcher();
-        var actions = {};
+        var group = config.group || '';
+        var actions = {
+            group: group
+        };
 
         dispatcher.register(function (payload) {
             if (actions.hasOwnProperty(payload.actionType)) {
@@ -16,10 +19,16 @@ module.exports = {
                 });
             }
 
+            if(config.logger) {
+                config.logger.log({
+                    payload: payload,
+                    group: group
+                }); // You can log all action here.
+            }
             // console.log(payload); // You can log all action here.
         });
 
-        names.forEach(function (name) {
+        config.names.forEach(function (name) {
             actions[name] = new Action(name, dispatcher);
         });
 
